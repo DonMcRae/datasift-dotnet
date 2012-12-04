@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "my-prog", "my-prog.csproj", "{3BEE30CF-B572-48C0-88B8-C79D4200F17F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLine", "..\commandline\src\libcmdline\CommandLine.csproj", "{5DEA2811-2FFA-4959-830B-CAD3ACACABEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugTests|Any CPU = DebugTests|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BEE30CF-B572-48C0-88B8-C79D4200F17F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BEE30CF-B572-48C0-88B8-C79D4200F17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BEE30CF-B572-48C0-88B8-C79D4200F17F}.DebugTests|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BEE30CF-B572-48C0-88B8-C79D4200F17F}.DebugTests|Any CPU.Build.0 = Debug|Any CPU
+		{3BEE30CF-B572-48C0-88B8-C79D4200F17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BEE30CF-B572-48C0-88B8-C79D4200F17F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DEA2811-2FFA-4959-830B-CAD3ACACABEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DEA2811-2FFA-4959-830B-CAD3ACACABEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DEA2811-2FFA-4959-830B-CAD3ACACABEB}.DebugTests|Any CPU.ActiveCfg = DebugTests|Any CPU
+		{5DEA2811-2FFA-4959-830B-CAD3ACACABEB}.DebugTests|Any CPU.Build.0 = DebugTests|Any CPU
+		{5DEA2811-2FFA-4959-830B-CAD3ACACABEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DEA2811-2FFA-4959-830B-CAD3ACACABEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
