@@ -40,9 +40,6 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommandLine">
-      <HintPath>..\commandline\src\libcmdline\obj\Debug\CommandLine.dll</HintPath>
-    </Reference>
     <Reference Include="datasift">
       <HintPath>..\..\datasift\bin\Debug\datasift.dll</HintPath>
     </Reference>
