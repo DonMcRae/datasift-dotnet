@@ -81,6 +81,11 @@ namespace my_prog
     interface Test4 : Test {
         Dictionary<string, object> Test(string a, string b, string c, string d);
     }
+
+    interface Test5 : Test
+    {
+        Dictionary<string, object> Test(string a, string b, string c, string d, string e);
+    }
     #endregion
 
     #region compile/validate
@@ -106,7 +111,7 @@ namespace my_prog
     }
     class TestDpuFromCsdl : Test3 {
         public Dictionary<string, object> Test(string csdl, string userName, string userKey) {
-            var def = TestHelper.Definition(csdl, userName, userKey);
+            var def = TestHelper.DefinitionFromCsdl(csdl, userName, userKey);
             return JsonHelpers.DpuBreakdownAsDictionary(def.getDpuBreakdown());
         }
     }
@@ -138,23 +143,44 @@ namespace my_prog
     #endregion
 
     #region stream
-    class TestStream : Test4 {
-        public Dictionary<string, object> Test(string connectionType, string csdl, string userName, string userKey) {
-            var def = TestHelper.Definition(csdl, userName, userKey);
+    class TestStreamCsdl : TestStreamHelper, Test4 
+    {
+        public Dictionary<string, object> Test(string connectionType, string csdl, string userName, string userKey) 
+        {
+            var def = TestHelper.DefinitionFromCsdl(csdl, userName, userKey);
+            return TestStream(connectionType, def);
+        }
+    }
+
+    class TestStreamX : TestStreamHelper, Test5
+    {
+        public Dictionary<string, object> Test(string connectionType, string csdl, string hash, string userName, string userKey)
+        {
+            var def = TestHelper.DefinitionFromX(csdl, hash, userName, userKey);
+            return TestStream(connectionType, def);
+        }
+    }
+
+    class TestStreamHelper
+    {
+        public Dictionary<string, object> TestStream(string connectionType, datasift.Definition def)
+        {
             var consumer = def.getConsumer(new EventHandlers(), connectionType);
             consumer.consume();
+            //can get here?
 
             var Result = new Dictionary<string, object>();
             return Result;
         }
     }
+
     #endregion
 
     class TestHelper {
         #region compile/validate
         public delegate void compileDeligate(datasift.Definition definition);
         public static Dictionary<string, object> validateOrCompile(string name, compileDeligate deligatedCompile, string csdl, string userName, string userKey) {
-            var def = Definition(csdl, userName, userKey);
+            var def = DefinitionFromCsdl(csdl, userName, userKey);
             deligatedCompile(def);
             var Result = JsonHelpers.definitionAsDictionary(def);
             Result.Add("name", name);
@@ -163,9 +189,16 @@ namespace my_prog
         #endregion
 
         #region definition
-        public static datasift.Definition Definition(string csdl, string userName, string userKey) {
-            var user = new datasift.User(userName, userKey);
-            var Result = user.createDefinition(csdl);
+        public static datasift.Definition DefinitionFromCsdl(string csdl, string userName, string userKey) {
+            var Result = new datasift.User(userName, userKey).createDefinition(csdl);
+            Assert.That(Result, Is.TypeOf<datasift.Definition>());
+            Assert.That(Result, Is.Not.Null);
+            return Result;
+        }
+
+        public static datasift.Definition DefinitionFromX(string csdl, string hash, string userName, string userKey)
+        {
+            var Result = new datasift.Definition(new datasift.User(userName, userKey), csdl, hash);
             Assert.That(Result, Is.TypeOf<datasift.Definition>());
             Assert.That(Result, Is.Not.Null);
             return Result;
@@ -260,7 +293,6 @@ namespace my_prog
             return Result;
         }
         #endregion
-
 
         public static  Dictionary<string, object> objectAsDictionary(string s,object o) {
             var Result = new Dictionary<string, object>();

@@ -102,13 +102,14 @@ namespace my_prog {
         private void runTest(string testName, TestDispatchTableValues test) {
             var numargs=test.requiredOptions.Count;
 
+            _theLogger.log("test-args", _options);
             try {
-                _theLogger.log("test-args", testName);
                 var o = (numargs == 0) ? (test.routine as Test0).Test() :
                         (numargs == 1) ? (test.routine as Test1).Test(_options[test.requiredOptions[0]]) :
                         (numargs == 2) ? (test.routine as Test2).Test(_options[test.requiredOptions[0]], _options[test.requiredOptions[1]]) :
                         (numargs == 3) ? (test.routine as Test3).Test(_options[test.requiredOptions[0]], _options[test.requiredOptions[1]], _options[test.requiredOptions[2]]) :
                         (numargs == 4) ? (test.routine as Test4).Test(_options[test.requiredOptions[0]], _options[test.requiredOptions[1]], _options[test.requiredOptions[2]], _options[test.requiredOptions[3]]) :
+                        (numargs == 5) ? (test.routine as Test5).Test(_options[test.requiredOptions[0]], _options[test.requiredOptions[1]], _options[test.requiredOptions[2]], _options[test.requiredOptions[3]], _options[test.requiredOptions[4]]) :
                         new Dictionary<string, object>() {{"program-error", "in Dispatcher.runTests" }};
                 _theLogger.log("test-result", o);
             }
@@ -202,12 +203,22 @@ namespace my_prog {
                         "user-name",
                         "user-key"
                     }));
-            dispatcher.Add("stream",
+            dispatcher.Add("stream-csdl",
                new TestDispatchTableValues(
-                   new TestStream(),
+                   new TestStreamCsdl(),
                    new string[]{
                         "connection-type",
                         "csdl",
+                        "user-name",
+                        "user-key"
+                    }));
+            dispatcher.Add("stream-x",
+               new TestDispatchTableValues(
+                   new TestStreamX(),
+                   new string[]{
+                        "connection-type",
+                        "csdl",
+                        "hash",
                         "user-name",
                         "user-key"
                     }));
