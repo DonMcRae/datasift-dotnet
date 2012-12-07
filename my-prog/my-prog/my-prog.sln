@@ -2,6 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "my-prog", "my-prog.csproj", "{3BEE30CF-B572-48C0-88B8-C79D4200F17F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9181A4F9-CCDF-4C53-9162-C7C9C4F28FE8} = {9181A4F9-CCDF-4C53-9162-C7C9C4F28FE8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datasift", "..\..\datasift\datasift.csproj", "{9181A4F9-CCDF-4C53-9162-C7C9C4F28FE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,6 +21,12 @@ Global
 		{3BEE30CF-B572-48C0-88B8-C79D4200F17F}.DebugTests|Any CPU.Build.0 = Debug|Any CPU
 		{3BEE30CF-B572-48C0-88B8-C79D4200F17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BEE30CF-B572-48C0-88B8-C79D4200F17F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9181A4F9-CCDF-4C53-9162-C7C9C4F28FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9181A4F9-CCDF-4C53-9162-C7C9C4F28FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9181A4F9-CCDF-4C53-9162-C7C9C4F28FE8}.DebugTests|Any CPU.ActiveCfg = Debug|Any CPU
+		{9181A4F9-CCDF-4C53-9162-C7C9C4F28FE8}.DebugTests|Any CPU.Build.0 = Debug|Any CPU
+		{9181A4F9-CCDF-4C53-9162-C7C9C4F28FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9181A4F9-CCDF-4C53-9162-C7C9C4F28FE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
