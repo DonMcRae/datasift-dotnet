@@ -275,9 +275,28 @@ namespace my_prog
         #endregion
 
         #region interaction
-        public static Dictionary<string, object> interactionAsDictionary(datasift.Interaction interaction) {
+        public static Dictionary<string, object> interactionAsDictionary(datasift.JSONdn interaction)
+        {
+            return a(interaction.getJVal(""));
+        }
+
+        public static Dictionary<string, object> a(Newtonsoft.Json.Linq.JToken token)
+        {
+
+            return new Dictionary<string, object>();
+        }
+
+        public static Dictionary<string, object> _interactionAsDictionary(datasift.JSONdn interaction, string root) {
             var Result = new Dictionary<string, object>();
             {
+                var keys = interaction.getKeys();
+                Result["keys"] = keys;
+                foreach (var key in keys)
+                {
+                    var t = interaction.getJVal("");
+                    
+                    
+                }
                 
             }
             return Result;
