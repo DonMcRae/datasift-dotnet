@@ -18,11 +18,26 @@ namespace my_prog {
         }
     }
 
-    sealed class Logger {
+    sealed class Logger :IDisposable{
+        private bool is_first;
+        
+        public Logger()
+        {
+            Write("[");
+            is_first = true;
+        }
+
+        private void Write(string message)
+        {
+            System.Console.Write(message);
+        }
+
         public void log(object o) {
-            System.Console.Write(
+            Write(
+                (is_first?"":",") +
                 Newtonsoft.Json.JsonConvert.SerializeObject(o)
             );
+            is_first = false;
         }
 
         public void log(string s,object o) {
@@ -39,6 +54,20 @@ namespace my_prog {
 
         public void logEvent(string s,object o) {
             log("event:"+s, o);
+        }
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            Write("]");
+        }
+
+        #endregion
+
+        ~Logger()
+        {
+            Dispose();
         }
     }
     
