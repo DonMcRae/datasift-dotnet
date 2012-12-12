@@ -23,7 +23,6 @@ namespace my_prog
                         _logger.logError("input error");
                     }
                 }
-                System.Console.WriteLine();
             }
         }
 
