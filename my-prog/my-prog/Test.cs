@@ -91,12 +91,12 @@ namespace my_prog
     #region compile/validate
     class TestValidate :Test3{
         public Dictionary<string, object> Test(string csdl, string userName, string userKey){
-            return TestHelper.validateOrCompile("validate",(d) => d.validate(), csdl, userName, userKey);
+            return TestHelper.validateOrCompile(CompileMode.ValidateOnly, csdl, userName, userKey);
         }
     }
     class TestCompile :Test3 {
         public Dictionary<string, object> Test(string csdl, string userName, string userKey) {
-            return TestHelper.validateOrCompile("compile", (d) => d.compile(), csdl, userName, userKey);
+            return TestHelper.validateOrCompile(CompileMode.Compile, csdl, userName, userKey);
         }
     }
     #endregion
@@ -179,11 +179,20 @@ namespace my_prog
     class TestHelper {
         #region compile/validate
         public delegate void compileDeligate(datasift.Definition definition);
-        public static Dictionary<string, object> validateOrCompile(string name, compileDeligate deligatedCompile, string csdl, string userName, string userKey) {
+        public static Dictionary<string, object> validateOrCompile(
+            CompileMode mode, string csdl, string userName, string userKey) 
+        {
             var def = DefinitionFromCsdl(csdl, userName, userKey);
-            deligatedCompile(def);
-            var Result = JsonHelpers.definitionAsDictionary(def);
-            Result.Add("name", name);
+            switch (mode)
+            {
+                case CompileMode.Compile:
+                    def.compile();
+                    break;
+                case CompileMode.ValidateOnly:
+                    def.validate();
+                    break;
+            }
+            var Result = JsonHelpers.definitionAsDictionary(def,mode);
             return Result;
         }
         #endregion
@@ -206,16 +215,18 @@ namespace my_prog
         #endregion
     }
 
+    public enum CompileMode { Compile, ValidateOnly };
     class JsonHelpers {
         #region definition
-        public static Dictionary<string, object> definitionAsDictionary(datasift.Definition def) {
+        public static Dictionary<string, object> definitionAsDictionary(
+            datasift.Definition def, CompileMode type) {
             var Result = new Dictionary<string, object>();
             {
                 Result.Add("createdAt", def.getCreatedAt());
                 Result.Add("user", userAsDictionary(def.getUser()));
                 Result.Add("csdl", def.get());
                 Result.Add("dpuTotal", def.getTotalDpu().ToString());
-                if (true) {  //if compile
+                if (type==CompileMode.Compile) { 
                     Result.Add("hash", def.getHash());
                 }
             }
