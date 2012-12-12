@@ -240,8 +240,8 @@ namespace my_prog
             {
                 var breakDown = new Dictionary<string, object>();
                 {
-                    breakDown.Add("total", dpu.getTotal());
-                    breakDown.Add("dpuItems", DpuItemDictionaryAsDictionary(dpu.getDpu()));
+                    breakDown.Add("dpu", dpu.getTotal());
+                    breakDown.Add("detail", DpuItemDictionaryAsDictionary(dpu.getDpu()));
                 }
                 Result.Add("dpuBreakdown", breakDown);
             }
