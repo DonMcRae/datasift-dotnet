@@ -98,8 +98,6 @@ namespace my_prog
 
     sealed class TestDispatchTableValues
     {
-        public delegate object testRoutineDelegate();
-
         public TestDispatchTableValues(
             Test routine,
             string[] requiredOptions)

@@ -5,8 +5,6 @@ using System.Text;
 
 namespace my_prog {
 
-    public delegate string getOptionDelegate(Dictionary<string, string> options);
-
     sealed class Application {
         #region Constructors
         public Application(Dictionary<string, string> options) {
