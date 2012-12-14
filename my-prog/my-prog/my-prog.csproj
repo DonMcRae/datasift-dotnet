@@ -62,7 +62,7 @@
     <Compile Include="Nunit_JsonDots.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test.cs" />
+    <Compile Include="TheTests.cs" />
     <Compile Include="TestInterface.cs" />
   </ItemGroup>
   <ItemGroup>
