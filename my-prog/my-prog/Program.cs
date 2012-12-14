@@ -10,6 +10,7 @@ namespace my_prog
 
         private Dictionary<string, string> lineToDict(string line)
         {
+            bool was_error = false;
             var options = new Dictionary<string, string>(); ;
             try
             {
@@ -18,9 +19,20 @@ namespace my_prog
             }
             catch (Newtonsoft.Json.JsonReaderException)
             {
-                var errorMessage=new Dictionary<string,string>();
-                errorMessage.Add("bad input", line);
-                _logger.logError(errorMessage);         
+                was_error=true;
+            }
+            catch ( Newtonsoft.Json.JsonSerializationException)
+            {
+                was_error=true;
+            }
+            if (was_error)
+            {
+                var details = new Dictionary<String, String>();
+                details.Add("details", "expecting json object (map/dictionary) of string,string");
+                details.Add("input", line);
+                details.Add("type", "bad input");
+
+                _logger.logError(details);      
             }
 
             return options;
