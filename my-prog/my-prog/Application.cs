@@ -46,7 +46,9 @@ namespace my_prog {
 
         private void setupDispatch() {
             dispatcher.Add("list", 
-                new TestDispatchTableValues(new ListTests(dispatcher), null));
+                new TestDispatchTableValues(
+                    new ListTests(dispatcher),
+                    null));
             dispatcher.Add("validate", 
                 new TestDispatchTableValues(
                     new TestValidate(),
