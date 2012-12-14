@@ -59,35 +59,6 @@ namespace my_prog
     }
 #endif
 
-    #region interfaces
-    interface Test { }
-
-    interface Test0 : Test {
-        Dictionary<string, object> Test();
-    }
-
-    interface Test1 : Test{
-        Dictionary<string, object> Test(string a);
-    }
-
-    interface Test2 : Test{
-        Dictionary<string, object> Test(string a, string b);
-    }
-
-    interface Test3 : Test {
-        Dictionary<string, object> Test(string a, string b, string c);
-    }
-
-    interface Test4 : Test {
-        Dictionary<string, object> Test(string a, string b, string c, string d);
-    }
-
-    interface Test5 : Test
-    {
-        Dictionary<string, object> Test(string a, string b, string c, string d, string e);
-    }
-    #endregion
-
     #region compile/validate
     class TestValidate :Test3{
         public Dictionary<string, object> Test(string csdl, string userName, string userKey){
