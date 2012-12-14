@@ -44,6 +44,11 @@ namespace my_prog
             log("exception", o);
         }
 
+        public void logProgramError(object o)
+        {
+            log("program error", o);
+        }
+
         public void logEvent(string s, object o)
         {
             log("event:" + s, o);

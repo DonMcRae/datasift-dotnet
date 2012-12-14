@@ -35,8 +35,11 @@ namespace my_prog
         {
             if (!dispatchTable.ContainsKey(this._options["test"]))
             {
-                _theLogger.log("invalid test name -- run test list to get a list");
-                Environment.Exit(1);
+                var details = new Dictionary<string, string>();
+                details.Add("type","bad input");
+                details.Add("details","invalid test name");
+                details.Add("help", "run test list to get a list");
+                _theLogger.logError(details);
             }
             else
             {
@@ -46,7 +49,6 @@ namespace my_prog
                 if (!areAllOptionsSet(test))
                 {
                     _theLogger.logError("missing options");
-                    Environment.Exit(1);
                 }
                 else
                 {
@@ -68,8 +70,15 @@ namespace my_prog
                         (numargs == 3) ? (test.routine as Test3).Test(_options[test.requiredOptions[0]], _options[test.requiredOptions[1]], _options[test.requiredOptions[2]]) :
                         (numargs == 4) ? (test.routine as Test4).Test(_options[test.requiredOptions[0]], _options[test.requiredOptions[1]], _options[test.requiredOptions[2]], _options[test.requiredOptions[3]]) :
                         (numargs == 5) ? (test.routine as Test5).Test(_options[test.requiredOptions[0]], _options[test.requiredOptions[1]], _options[test.requiredOptions[2]], _options[test.requiredOptions[3]], _options[test.requiredOptions[4]]) :
-                        new Dictionary<string, object>() { { "program-error", "in Dispatcher.runTests" } };
-                _theLogger.log("test-result", o);
+                        null;
+                if (o == null)
+                {
+                    _theLogger.logProgramError("in Dispatcher.runTests");
+                }
+                else
+                {
+                    _theLogger.log("test-result", o);
+                }
             }
             catch (datasift.AccessDeniedException)
             {
@@ -97,6 +106,7 @@ namespace my_prog
     }
 
     sealed class TestDispatchTableValues
+        //data structure class
     {
         public TestDispatchTableValues(
             Test routine,
@@ -106,7 +116,7 @@ namespace my_prog
             this.requiredOptions = (requiredOptions == null) ? null : new List<string>(requiredOptions);
         }
 
-        public Test routine;
-        public List<string> requiredOptions;
+        public Test routine { get; private set; }
+        public List<string> requiredOptions { get; private set; }
     }
 }
