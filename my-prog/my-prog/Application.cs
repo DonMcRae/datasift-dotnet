@@ -61,7 +61,7 @@ namespace my_prog {
         }
 
         private void runTest(string testName, TestDispatchTableValues test) {
-            var numargs=test.requiredOptions.Count;
+            var numargs=(test.requiredOptions==null)?0:test.requiredOptions.Count;
 
             _theLogger.log("test-args", _options);
             try {
@@ -114,7 +114,7 @@ namespace my_prog {
                 this.dispatcher = dispatcher;
             }
             public Dictionary<string, object> Test() {
-                return new Dictionary<string,object>(){{"",dispatcher.Keys()}};
+                return new Dictionary<string,object>(){{"Test Names",dispatcher.Keys()}};
             }
         }
       
